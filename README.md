@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# Docka: Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Mobile app for **Docka**, an on-demand delivery service for boats. Customers anchored in a bay order meals from
+nearby restaurants or groceries from a market, and a delivery boat brings the order to their location.
 
-## Get started
+Expo · React Native · TypeScript · Expo Router · Zustand · react-native-maps · Supabase
 
-1. Install dependencies
+![Onboarding, home, restaurant menu and cart](docs/screenshots.png)
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- **Onboarding and service choice**: restaurant or market.
+- **Delivery point on a map**: the customer shares GPS location (expo-location) and pins the boat on a map
+  (react-native-maps).
+- **Browse**: nearby restaurants with delivery times, restaurant menus, market categories (fresh produce, snacks, drinks, breakfast, cleaning).
+- **Cart**: add and remove items, change quantities, subtotal, boat-delivery fee and total.
+- **Checkout**:
+  - steps: location → details → summary;
+  - contact details and a charter-guest toggle;
+  - boat name and notes for the delivery crew (for example, flag colour).
+- **Order history** and an order-success screen.
+- Tab navigation with a centre action button.
 
-   ```bash
-   npx expo start
-   ```
+## Status
 
-In the output, you'll find options to open the app in a
+UI prototype. Menu and market data are mocked in the app, and orders live in app state. The Supabase client is
+already configured for authentication and session storage, ready for the backend integration.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run
 
 ```bash
-npm run reset-project
+npm install
+cp .env.example .env    # Supabase project URL + publishable (anon) key
+npx expo start          # open in Expo Go, or an Android / iOS simulator
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Structure
 
-## Learn more
+```
+app/                 screens (file-based routing with Expo Router)
+  (tabs)/            home, restaurants, market, profile tabs
+  restaurant/[id]    restaurant menu
+  market/[id]        market item (placeholder)
+  cart, checkout, orders, location, onboarding, select-type, success
+src/
+  context/           cart context
+  store/             global app state (Zustand)
+  lib/supabase.ts    Supabase client (AsyncStorage session)
+components/          shared UI components
+constants/theme.ts   colours and fonts
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Author
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Muhammet Kaan Doğru
